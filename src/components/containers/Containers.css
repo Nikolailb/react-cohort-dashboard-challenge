@@ -1,0 +1,7 @@
+.box {
+  border-radius: 0.5rem;
+  background-color: var(--element-bg);
+  padding: 1rem;
+  display: flex;
+  gap: 1rem;
+}
