@@ -5,13 +5,16 @@ import LogoIcon from "../icons/LogoIcon";
 
 import { CurrentUserContext } from "../../App";
 import { getInitialsFromUser } from "../../util/misc";
+import { Link } from "react-router-dom";
 
 function Header() {
   const { currentUser } = useContext(CurrentUserContext);
   return (
     <header className="header">
       <div>
-        <LogoIcon />
+        <Link to="/">
+          <LogoIcon />
+        </Link>
       </div>
       <nav>
         <ul>

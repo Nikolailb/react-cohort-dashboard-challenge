@@ -12,21 +12,10 @@
   color: var(--primary);
   font-family: "Poppins";
   font-weight: 500;
-}
-html,
-body {
-  height: 100%;
-  margin: 0;
+  font-size: medium;
 }
 
 body {
   background-color: var(--body-bg);
-  display: flex;
-  flex-direction: column;
-}
-
-#root {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
+  margin: 0;
 }

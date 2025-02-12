@@ -4,7 +4,7 @@ import CreatePost from "./CreatePost";
 import Post from "./Post";
 import { PostsUrlBase } from "../../util/api";
 
-function Content() {
+function Dashboard() {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
@@ -35,4 +35,4 @@ function Content() {
   );
 }
 
-export default Content;
+export default Dashboard;

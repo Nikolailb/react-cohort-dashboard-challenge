@@ -8,8 +8,9 @@ import "./components/content/Content.css";
 
 import Header from "./components/ui/Header";
 import Sidebar from "./components/ui/Sidebar";
-import Content from "./components/content/Content";
+import Dashboard from "./components/content/Dashboard";
 import { getUserById } from "./util/api";
+import { Route, Routes } from "react-router-dom";
 
 const CurrentUserContext = createContext();
 
@@ -29,7 +30,10 @@ function App() {
         <Header />
         <div className="main-layout">
           <Sidebar />
-          <Content />
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/profile" element={<div>WIP</div>} />
+          </Routes>
         </div>
       </CurrentUserContext.Provider>
     </>

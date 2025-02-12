@@ -21,8 +21,8 @@
   flex-grow: 1; /* Takes up remaining space */
   padding: 2rem;
   gap: 1rem;
-  overflow: auto;
-  max-height: calc(100vh - 5rem);
+  overflow: scroll;
+  /* max-height: calc(100vh - 5rem); */
 }
 
 .container {
