@@ -1,25 +1,20 @@
-import { Link } from "react-router-dom";
-
 import Avatar from "../Avatar";
 import LogoIcon from "../icons/LogoIcon";
 function Header() {
   return (
     <header className="header">
       <div>
-        <Link to="/">
-          <LogoIcon />
-        </Link>
+        <LogoIcon />
       </div>
       <nav>
         <ul>
           <li>
-            <Link to="/profile">
-              <Avatar
-                bgColor={"#64dc78"}
-                initials={"NB"}
-                textColor={"var(--primary)"}
-              />{" "}
-            </Link>
+            <Avatar
+              bgColor={"#64dc78"}
+              initials={"NB"}
+              textColor={"var(--primary)"}
+              to="/profile"
+            />
           </li>
         </ul>
       </nav>

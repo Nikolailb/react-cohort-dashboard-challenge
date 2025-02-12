@@ -17,3 +17,7 @@
 .container.active .icon-label {
   color: var(--primary) !important;
 }
+
+.send-icon {
+  fill: var(--text-color);
+}

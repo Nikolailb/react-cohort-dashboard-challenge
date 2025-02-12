@@ -11,6 +11,7 @@
 
   color: var(--primary);
   font-family: "Poppins";
+  font-weight: 500;
 }
 
 body {
