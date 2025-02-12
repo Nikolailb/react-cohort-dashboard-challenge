@@ -8,28 +8,32 @@ import "./components/content/Content.css";
 
 import Header from "./components/ui/Header";
 import Sidebar from "./components/ui/Sidebar";
-import CreatePost from "./components/content/CreatePost";
-import Post from "./components/content/Post";
+import Content from "./components/content/Content";
+import { getUserById } from "./util/api";
 
-const UserContext = createContext();
+const CurrentUserContext = createContext();
 
 function App() {
-  const [currentUser, serCurrentUser] = useState();
+  const [currentUser, setCurrentUser] = useState();
+  useEffect(() => {
+    getUserById(1, setCurrentUser);
+  }, []);
+
+  if (!currentUser) {
+    return <div>Loading...</div>; // or a loading spinner, or some placeholder content
+  }
 
   return (
     <>
-      <UserContext.Provider value={{ currentUser }}>
+      <CurrentUserContext.Provider value={{ currentUser }}>
         <Header />
         <div className="main-layout">
           <Sidebar />
-          <main className="content">
-            <CreatePost />
-            <Post />
-          </main>
+          <Content />
         </div>
-      </UserContext.Provider>
+      </CurrentUserContext.Provider>
     </>
   );
 }
 
-export default App;
+export { App, CurrentUserContext };

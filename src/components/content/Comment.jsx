@@ -1,17 +1,30 @@
+import { useEffect, useState } from "react";
+import { getUserById } from "../../util/api";
 import Avatar from "../Avatar";
 import Internal from "../containers/Internal";
+import { getFullName, getInitialsFromUser } from "../../util/misc";
 
-function Comment() {
+function Comment({ comment }) {
+  const [owner, setOwner] = useState(null);
+
+  useEffect(() => {
+    getUserById(comment.contactId, setOwner);
+  }, [comment.contactId]);
+
+  if (!owner) {
+    return <div>Loading comment...</div>;
+  }
+
   return (
     <Internal>
       <Avatar
-        bgColor={"#64dc78"}
-        initials={"NB"}
+        bgColor={owner.favouriteColour}
+        initials={getInitialsFromUser(owner)}
         textColor={"var(--primary)"}
       />
       <Internal className={"comment"}>
-        <h4>CONTACT NAME</h4>
-        COMMENT CONTENT
+        <h4>{getFullName(owner)}</h4>
+        {comment.content}
       </Internal>
     </Internal>
   );

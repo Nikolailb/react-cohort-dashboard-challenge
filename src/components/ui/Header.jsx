@@ -1,6 +1,13 @@
+import { useContext } from "react";
+
 import Avatar from "../Avatar";
 import LogoIcon from "../icons/LogoIcon";
+
+import { CurrentUserContext } from "../../App";
+import { getInitialsFromUser } from "../../util/misc";
+
 function Header() {
+  const { currentUser } = useContext(CurrentUserContext);
   return (
     <header className="header">
       <div>
@@ -10,8 +17,8 @@ function Header() {
         <ul>
           <li>
             <Avatar
-              bgColor={"#64dc78"}
-              initials={"NB"}
+              bgColor={currentUser.favouriteColour}
+              initials={getInitialsFromUser(currentUser)}
               textColor={"var(--primary)"}
               to="/profile"
             />
