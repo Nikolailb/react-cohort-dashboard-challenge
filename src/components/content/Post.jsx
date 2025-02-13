@@ -5,7 +5,7 @@ import Box from "../containers/Box";
 import Comment from "./Comment";
 import CreateComment from "./CreateComment";
 import { getPostComments, getUserById } from "../../util/api";
-import { getFullName } from "../../util/misc";
+import { getFullName, getInitialsFromUser } from "../../util/misc";
 
 function Post({ post }) {
   const [owner, setOwner] = useState(null);
@@ -26,7 +26,10 @@ function Post({ post }) {
   return (
     <Box className="post-container">
       <div className="post-header">
-        <Avatar bgColor={"red"} initials={"RD"} />
+        <Avatar
+          bgColor={owner.favouriteColour}
+          initials={getInitialsFromUser(owner)}
+        />
         <div className="post-title-container">
           <h4 className="post-owner">{getFullName(owner)}</h4>
           <h5 className="post-title">{post.title}</h5>
@@ -37,7 +40,7 @@ function Post({ post }) {
       {comments.map((comment, index) => {
         return <Comment key={index} comment={comment} />;
       })}
-      <CreateComment />
+      <CreateComment post={post} setComments={setComments} />
     </Box>
   );
 }

@@ -1,38 +1,32 @@
-import { useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 import CreatePost from "./CreatePost";
 import Post from "./Post";
-import { PostsUrlBase } from "../../util/api";
+import { getPosts } from "../../util/api";
 
-function Dashboard() {
+const PostsContext = createContext();
+
+export default function Dashboard() {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    fetch(PostsUrlBase)
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error(
-            "Failed to fetch information about initial user (id = 1)."
-          );
-        }
-        return res.json();
-      })
-      .then((data) => {
-        setPosts(data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    updatePosts();
   }, []);
 
+  const updatePosts = () => {
+    getPosts(setPosts);
+  };
+
   return (
-    <main className="content">
-      <CreatePost />
-      {posts.map((post, index) => {
-        return <Post key={index} post={post} />;
-      })}
-    </main>
+    <PostsContext.Provider value={{ posts, setPosts, updatePosts }}>
+      <main className="content">
+        <CreatePost />
+        {posts.map((post, index) => {
+          return <Post key={index} post={post} />;
+        })}
+      </main>
+    </PostsContext.Provider>
   );
 }
 
-export default Dashboard;
+export { PostsContext };

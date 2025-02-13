@@ -1,8 +1,8 @@
 import Button from "../ui/Button";
 
-function SendIcon() {
+function SendIcon({ onClick }) {
   return (
-    <Button>
+    <Button onClick={onClick}>
       <div className="container">
         <svg
           className="icon send-icon"
