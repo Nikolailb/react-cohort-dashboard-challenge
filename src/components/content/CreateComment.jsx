@@ -8,7 +8,7 @@ import { CurrentUserContext } from "../../App";
 import { getInitialsFromUser } from "../../util/misc";
 import { createComment } from "../../util/api";
 
-function CreateComment({ post, setComments }) {
+function CreateComment({ post, updateComments }) {
   const { currentUser } = useContext(CurrentUserContext);
   const [content, setContent] = useState("");
   const handleChange = (event) => {
@@ -22,8 +22,7 @@ function CreateComment({ post, setComments }) {
       content: content,
       contactId: currentUser.id,
     };
-    createComment(post.id, comment, setComments);
-    setContent("");
+    createComment(post.id, comment, [() => setContent(""), updateComments]);
   };
 
   return (

@@ -19,12 +19,10 @@ export default function Dashboard() {
 
   return (
     <PostsContext.Provider value={{ posts, setPosts, updatePosts }}>
-      <main className="content">
-        <CreatePost />
-        {posts.map((post, index) => {
-          return <Post key={index} post={post} />;
-        })}
-      </main>
+      <CreatePost />
+      {posts.map((post, index) => {
+        return <Post key={index} foundPost={post} />;
+      })}
     </PostsContext.Provider>
   );
 }

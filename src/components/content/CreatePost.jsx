@@ -11,7 +11,7 @@ import { createPost } from "../../util/api";
 
 function CreatePost() {
   const { currentUser } = useContext(CurrentUserContext);
-  const { setPosts } = useContext(PostsContext);
+  const { updatePosts } = useContext(PostsContext);
   const [content, setContent] = useState("");
 
   const handleChange = (event) => {
@@ -26,8 +26,7 @@ function CreatePost() {
       contactId: currentUser.id,
       content: content,
     };
-    createPost(post, setPosts);
-    setContent("");
+    createPost(post, [() => setContent(""), () => updatePosts]);
   };
 
   return (

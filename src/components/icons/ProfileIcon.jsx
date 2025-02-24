@@ -2,9 +2,9 @@ import Icon from "./Icon";
 
 function ProfileIcon({ label, active }) {
   return (
-    <Icon label={label}>
+    <Icon label={label} active={active}>
       <svg
-        className={active ? "icon active" : "icon"}
+        className="icon"
         width="41"
         height="40"
         viewBox="0 0 41 40"

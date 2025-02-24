@@ -1,5 +1,11 @@
 .post-title {
   color: var(--secondary);
+  cursor: pointer;
+}
+
+.post-title:hover {
+  color: var(--secondary);
+  box-shadow: 0 2px 1px -1px gray;
 }
 
 .post-container {

@@ -2,15 +2,13 @@ const PostsUrlBase = "https://boolean-uk-api-server.fly.dev/nikolailb/post";
 const ContactsUrlBase =
   "https://boolean-uk-api-server.fly.dev/nikolailb/contact";
 
-function getUserById(id, setter) {
-  fetch(ContactsUrlBase + `/${id}`, {
+function getUserById(userId, setter) {
+  fetch(ContactsUrlBase + `/${userId}`, {
     method: "Get",
   })
     .then((res) => {
       if (!res.ok) {
-        throw new Error(
-          "Failed to fetch information about initial user (id = 1)."
-        );
+        throw new Error("Failed to fetch information about user");
       }
       return res.json();
     })
@@ -22,13 +20,11 @@ function getUserById(id, setter) {
     });
 }
 
-function getPostComments(id, setter) {
-  fetch(PostsUrlBase + `/${id}/comment`)
+function getPostComments(postId, setter) {
+  fetch(PostsUrlBase + `/${postId}/comment`)
     .then((res) => {
       if (!res.ok) {
-        throw new Error(
-          "Failed to fetch information about initial user (id = 1)."
-        );
+        throw new Error("Failed to fetch information about comments.");
       }
       return res.json();
     })
@@ -40,7 +36,7 @@ function getPostComments(id, setter) {
     });
 }
 
-function createPost(post, setPosts) {
+function createPost(post, toCall = []) {
   fetch(PostsUrlBase, {
     method: "POST",
     headers: {
@@ -56,14 +52,14 @@ function createPost(post, setPosts) {
     })
     .then((data) => {
       console.log("Successfully created post: ", data);
-      setPosts((posts) => [data, ...posts]);
+      toCall.forEach((func) => func());
     })
     .catch((error) => {
       console.error(error);
     });
 }
 
-export function createComment(postId, comment, setComments) {
+export function createComment(postId, comment, toCall = []) {
   fetch(`${PostsUrlBase}/${postId}/comment`, {
     method: "POST",
     headers: {
@@ -79,7 +75,7 @@ export function createComment(postId, comment, setComments) {
     })
     .then((data) => {
       console.log("Successfully created comment: ", data);
-      setComments((comments) => [...comments, data]);
+      toCall.forEach((func) => func());
     })
     .catch((error) => {
       console.error(error);
