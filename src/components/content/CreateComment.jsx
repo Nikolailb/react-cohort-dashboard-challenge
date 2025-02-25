@@ -4,11 +4,11 @@ import Avatar from "../Avatar";
 import Internal from "../containers/Internal";
 import SendIcon from "../icons/SendIcon";
 import Input from "../ui/Input";
-import { CurrentUserContext } from "../../App";
 import { getInitialsFromUser } from "../../util/misc";
-import { createComment } from "../../util/api";
+import { PostsUrlBase } from "../../util/api";
+import { CurrentUserContext } from "../Contexts";
 
-function CreateComment({ post, updateComments }) {
+function CreateComment({ post, getComments }) {
   const { currentUser } = useContext(CurrentUserContext);
   const [content, setContent] = useState("");
   const handleChange = (event) => {
@@ -22,7 +22,26 @@ function CreateComment({ post, updateComments }) {
       content: content,
       contactId: currentUser.id,
     };
-    createComment(post.id, comment, [() => setContent(""), updateComments]);
+    fetch(`${PostsUrlBase}/${post.id}/comment`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(comment),
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Failed to create comment for post.");
+        }
+        return res.json();
+      })
+      .then(() => {
+        setContent("");
+        getComments(post);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   return (

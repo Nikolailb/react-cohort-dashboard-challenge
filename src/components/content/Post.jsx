@@ -4,7 +4,7 @@ import Avatar from "../Avatar";
 import Box from "../containers/Box";
 import Comment from "./Comment";
 import CreateComment from "./CreateComment";
-import { getPostComments, getUserById, PostsUrlBase } from "../../util/api";
+import { getUserById, PostsUrlBase } from "../../util/api";
 import { getFullName, getInitialsFromUser } from "../../util/misc";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -28,8 +28,24 @@ function Post({ foundPost }) {
       return;
     }
     getUserById(post.contactId, setOwner);
-    getPostComments(post.id, setComments);
+    getComments(post);
   }, [post]);
+
+  const getComments = (post) => {
+    fetch(PostsUrlBase + `/${post.id}/comment`)
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Failed to fetch information about comments.");
+        }
+        return res.json();
+      })
+      .then((data) => {
+        setComments(data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
   if (!post || !owner) {
     return <div>Loading post...</div>;
@@ -52,13 +68,10 @@ function Post({ foundPost }) {
       </div>
       <div className="post-content">{post.content}</div>
       <hr />
-      {comments.map((comment, index) => {
-        return <Comment key={index} comment={comment} />;
+      {comments.map((comment) => {
+        return <Comment key={comment.id} comment={comment} />;
       })}
-      <CreateComment
-        post={post}
-        updateComments={() => getPostComments(post.id, setComments)}
-      />
+      <CreateComment post={post} getComments={getComments} />
     </Box>
   );
 }

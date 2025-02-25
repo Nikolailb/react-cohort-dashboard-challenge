@@ -1,6 +1,6 @@
-function Icon({ label, active, children }) {
+function Icon({ label, children }) {
   return (
-    <div className={active ? "container active" : "container"}>
+    <div className={"container"}>
       {children}
       {label && <div className="icon-label">{label}</div>}
     </div>

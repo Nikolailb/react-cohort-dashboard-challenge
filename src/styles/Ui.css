@@ -67,6 +67,14 @@ nav a {
   background-color: var(--input-bg);
 }
 
+.sidebar-button.active .icon {
+  fill: var(--primary);
+}
+
+.sidebar-button.active .icon-label {
+  color: var(--primary) !important;
+}
+
 /* Buttons */
 
 .cohort-button {

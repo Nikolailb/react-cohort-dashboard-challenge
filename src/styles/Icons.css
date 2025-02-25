@@ -10,14 +10,6 @@
   color: var(--secondary);
 }
 
-.container.active .icon {
-  fill: var(--primary);
-}
-
-.container.active .icon-label {
-  color: var(--primary) !important;
-}
-
 .send-icon {
   fill: var(--text-color);
 }

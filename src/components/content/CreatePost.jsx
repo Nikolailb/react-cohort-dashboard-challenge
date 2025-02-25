@@ -4,10 +4,9 @@ import Button from "../ui/Button";
 import Avatar from "../Avatar";
 import Box from "../containers/Box";
 import Input from "../ui/Input";
-import { CurrentUserContext } from "../../App";
-import { PostsContext } from "./Dashboard";
 import { getInitialsFromUser } from "../../util/misc";
-import { createPost } from "../../util/api";
+import { PostsUrlBase } from "../../util/api";
+import { CurrentUserContext, PostsContext } from "../Contexts";
 
 function CreatePost() {
   const { currentUser } = useContext(CurrentUserContext);
@@ -26,7 +25,27 @@ function CreatePost() {
       contactId: currentUser.id,
       content: content,
     };
-    createPost(post, [() => setContent(""), () => updatePosts]);
+    fetch(PostsUrlBase, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(post),
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Failed to create post.");
+        }
+        return res.json();
+      })
+      .then(() => {
+        console.log(updatePosts);
+        setContent("");
+        updatePosts();
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   return (

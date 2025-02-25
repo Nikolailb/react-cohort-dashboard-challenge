@@ -3,9 +3,9 @@ import { useContext } from "react";
 import Avatar from "../Avatar";
 import LogoIcon from "../icons/LogoIcon";
 
-import { CurrentUserContext } from "../../App";
 import { getInitialsFromUser } from "../../util/misc";
 import { Link } from "react-router-dom";
+import { CurrentUserContext } from "../Contexts";
 
 function Header() {
   const { currentUser } = useContext(CurrentUserContext);

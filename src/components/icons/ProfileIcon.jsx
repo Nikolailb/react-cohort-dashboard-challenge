@@ -1,8 +1,8 @@
 import Icon from "./Icon";
 
-function ProfileIcon({ label, active }) {
+function ProfileIcon({ label }) {
   return (
-    <Icon label={label} active={active}>
+    <Icon label={label}>
       <svg
         className="icon"
         width="41"

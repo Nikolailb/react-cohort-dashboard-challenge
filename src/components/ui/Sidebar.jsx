@@ -14,7 +14,7 @@ function Sidebar() {
           active={active}
           setActive={setActive}
         >
-          <HomeIcon label="Home" active={active == "home"} />
+          <HomeIcon label="Home" />
         </SidebarButton>
         <SidebarButton
           name="profile"
@@ -22,7 +22,7 @@ function Sidebar() {
           active={active}
           setActive={setActive}
         >
-          <ProfileIcon label="Profile" active={active == "profile"} />
+          <ProfileIcon label="Profile" />
         </SidebarButton>
       </ul>
     </aside>

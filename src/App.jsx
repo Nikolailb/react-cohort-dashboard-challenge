@@ -1,10 +1,4 @@
-import { useState, createContext, useEffect } from "react";
-
-import "./App.css";
-import "./components/ui/Ui.css";
-import "./components/icons/Icons.css";
-import "./components/containers/Containers.css";
-import "./components/content/Content.css";
+import { useState, useEffect } from "react";
 
 import Header from "./components/ui/Header";
 import Sidebar from "./components/ui/Sidebar";
@@ -12,8 +6,7 @@ import Dashboard from "./components/content/Dashboard";
 import { getUserById } from "./util/api";
 import { Route, Routes } from "react-router-dom";
 import Post from "./components/content/Post";
-
-const CurrentUserContext = createContext();
+import StylingProvider from "./components/StylingProvider";
 
 function App() {
   const [currentUser, setCurrentUser] = useState();
@@ -27,7 +20,7 @@ function App() {
 
   return (
     <>
-      <CurrentUserContext.Provider value={{ currentUser }}>
+      <StylingProvider currentUser={currentUser}>
         <Header />
         <div className="main-layout">
           <Sidebar />
@@ -39,9 +32,9 @@ function App() {
             </Routes>
           </main>
         </div>
-      </CurrentUserContext.Provider>
+      </StylingProvider>
     </>
   );
 }
 
-export { App, CurrentUserContext };
+export { App };
