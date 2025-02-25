@@ -39,7 +39,6 @@ function CreatePost() {
         return res.json();
       })
       .then(() => {
-        console.log(updatePosts);
         setContent("");
         updatePosts();
       })

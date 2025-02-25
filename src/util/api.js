@@ -1,6 +1,8 @@
-const PostsUrlBase = "https://boolean-uk-api-server.fly.dev/nikolailb/post";
-const ContactsUrlBase =
-  "https://boolean-uk-api-server.fly.dev/nikolailb/contact";
+const ApiUrl =
+  import.meta.env.VITE_API_URL ??
+  "https://boolean-uk-api-server.fly.dev/nikolailb";
+const PostsUrlBase = ApiUrl + "/post";
+const ContactsUrlBase = ApiUrl + "/contact";
 
 function getUserById(userId, setter, callbacks = []) {
   fetch(ContactsUrlBase + `/${userId}`, {
